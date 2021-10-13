@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html lang="es" class="h-100">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <base href="/newcar/">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="res/css/style.css">
     <title>New Car</title>
 </head>
 
 <body class="h-100 bg-g">
-    <!-- <div class="w-100 bg-c1_3" style="height: 50px;"></div> -->
     <div class="container pt-5">
         <div class="row">
             <div class="col-12 text-center">
@@ -27,8 +29,7 @@
                     </div>
                     <div class="col-12 col-md-8 mx-auto mt-2">
                         <label for="contraseña" class="form-label">Contraseña</label>
-                        <div class="input-group" id="mos_o
-                        c_pass">
+                        <div class="input-group" id="mos_oc_pass">
                             <input type="password" name="contraseña" id="contraseña" class="form-control" required>
                             <span class="input-group-text"><i class="fas fa-eye-slash" role="button"></i></span>
                         </div>
@@ -37,7 +38,7 @@
                         <input type="submit" value="Enviar" class="col-5 my-3 btn btn-sub mx-auto">
                     </div>
                     <div class="row mt-2 text-center mb-3">
-                        <a href="php/recuperar-contraseña.php" class="link-blanco"><span>¿Olvidaste tu contraseña?</span></a>
+                        <span><a href="php/recuperar-contraseña.php" class="link-blanco">¿Olvidaste tu contraseña?</a></span>
                     </div>
                 </form>
             </div>

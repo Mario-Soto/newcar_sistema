@@ -140,6 +140,7 @@ footer {
 }
 .bg-g {
 	background-color: #474646;
+	color: white;
 }
 .bg-g2 {
 	background-color: #7b7979;
@@ -192,8 +193,27 @@ nav ul li a.btn:hover {
 }
 
 .link-blanco:hover {
-	color: white;
+	color: black;
 }
+.btn-submit{
+	background-color: #428f5c;
+	color: white;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+}
+.btn-submit:hover{
+	background-color: #9ccaab;
+}
+.btn-limpiar{
+	background-color: #c36a5a;
+	color: white;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+}
+.btn-limpiar:hover{
+	background-color: #ffcec4;
+}
+
 
 /* PARA CAMBIAR EL DISEÑO DEL SCROLL */
 nav::-webkit-scrollbar {
