@@ -6,7 +6,7 @@
                 <span class="fs-5 fw-semibold ms-1">New Car</span>
             </a>
             <hr>
-            <ul class="list-unstyled flex-column mb-auto">
+            <ul class="list-unstyled flex-column mb-5">
                 <li class="mb-1">
                     <a class="btn rounded collapsed">INICIO</a>
                 </li>

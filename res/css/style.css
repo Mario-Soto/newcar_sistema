@@ -1,60 +1,60 @@
 @import url(all.css);
 @import url(bootstrap.css);
 
-nav{
+nav {
 	overflow-y: auto;
 }
 
-a{
-    color: inherit;
-    text-decoration: none;
+a {
+	color: inherit;
+	text-decoration: none;
 }
 
-a:hover{
-    color: inherit;
+a:hover {
+	color: inherit;
 }
 
-.fixed-top{
+.fixed-top {
 	position: fixed;
 	top: 0;
 }
 
-footer{
+footer {
 	margin-top: 30px;
-    padding: 10px;
-    background-color: #eec396;
-    text-align: center;
+	padding: 10px;
+	background-color: #eec396;
+	text-align: center;
 }
 
-.text-justify{
+.text-justify {
 	text-align: justify;
 }
 
-.row{
+.row {
 	margin-right: 0;
 	margin-left: 0;
 }
 
-.list-group-item{
+.list-group-item {
 	background-color: inherit;
 }
 
-.form-gris{
+.form-gris {
 	background-color: #d5d5d5;
 }
 
-.form-gris:focus{
+.form-gris:focus {
 	background-color: #d5d5d5;
 	border-color: #3b6a7a;
 	box-shadow: 0 0 0 0.25rem rgba(200, 227, 209, 0.85);
 }
 
-.form-gris:focus{
+.form-gris:focus {
 	background-color: #d5d5d5;
 	box-shadow: 0 0 0 0.25rem rgba(200, 227, 209, 0.85);
 }
 
-.btn-enviar{
+.btn-enviar {
 	padding: 5px auto;
 	background-color: #6eae84;
 	color: #ecf5ef;
@@ -62,38 +62,38 @@ footer{
 	letter-spacing: 5px;
 }
 
-.btn-enviar:hover{
+.btn-enviar:hover {
 	background-color: rgba(110, 174, 132, 0.85);
 	border-color: #428f5c;
 }
 
-.form-check-1:focus{
+.form-check-1:focus {
 	border-color: rgb(70, 81, 133);
-	box-shadow: 0 0 0 0.25rem rgba(70, 81, 133, 0.50);
+	box-shadow: 0 0 0 0.25rem rgba(70, 81, 133, 0.5);
 }
 
-.form-check-1:checked{
+.form-check-1:checked {
 	background-color: #6e77a2;
 	border-color: #465185;
 }
 
-#verificacion{
+#verificacion {
 	position: fixed;
 	top: 0;
 	bottom: 0;
 	left: 0;
 	right: 0;
-	background-color: rgba(0,0,0,0.5);
+	background-color: rgba(0, 0, 0, 0.5);
 	z-index: 100000;
 }
 
-.notif{
+.notif {
 	padding-top: 40px;
 	padding-bottom: 40px;
 	background-color: #eec396;
 }
 
-.btn-conf{
+.btn-conf {
 	padding: 5px auto;
 	background-color: #6e77a2;
 	color: #c6cbdd;
@@ -102,7 +102,7 @@ footer{
 	text-align: center;
 }
 
-.btn-conf:hover{
+.btn-conf:hover {
 	background-color: rgba(110, 119, 162, 0.85);
 	border-color: #465185;
 }
@@ -110,18 +110,18 @@ footer{
 /*         */
 /* SISTEMA */
 /*         */
-.bg-c1{
+.bg-c1 {
 	background-color: #8dabb5;
 }
-.bg-c1_3{
+.bg-c1_3 {
 	background-color: #608795;
 }
-.contenedor{
+.contenedor {
 	width: 100%;
 }
-.sidebar{
+.sidebar {
 	width: 250px;
-	background-color: #7B7979;
+	background-color: #7b7979;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -130,112 +130,112 @@ footer{
 	color: white;
 	margin-left: -250px;
 }
-.title{
+.title {
 	font-size: 1.5em;
 	color: white;
 }
-.sidebar.m-active{
+.sidebar.m-active {
 	margin-left: 0px;
 }
-.bg-g{
+.bg-g {
 	background-color: #474646;
 }
-.bg-g2{
-	background-color: #7B7979;
+.bg-g2 {
+	background-color: #7b7979;
 }
-nav ul li a.btn{
+nav ul li a.btn {
 	width: 100%;
 	color: white;
 	text-align: left;
 	border-bottom: 1px solid white;
 }
-nav ul li a.btn:hover{
-	background-color: #AEA9A9;
+nav ul li a.btn:hover {
+	background-color: #aea9a9;
 	color: black;
 }
-.sub-list{
+.sub-list {
 	margin-left: 50px;
 }
-.sub-list a:hover{
+.sub-list a:hover {
 	border-bottom: 0.5px solid white;
 }
-.main{
+.main {
 	margin-left: 0px;
 	transition: all 0.3s;
 }
 
-.m-active{
+.m-active {
 	margin-left: 250px;
 }
 
-.m-tira{
+.m-tira {
 	margin-top: 50px;
 }
-#logo-login{
+#logo-login {
 	width: 35%;
 	max-width: 175px;
 }
-#tira{
+#tira {
 	margin-left: 0;
 	transition: all 0.3s;
 }
 
-.btn.btn-sub{
+.btn.btn-sub {
 	background-color: #465185;
 	color: white;
 }
 
-.btn.btn-sub:hover{
+.btn.btn-sub:hover {
 	background-color: #6e77a2;
 	color: white;
 }
 
-.link-blanco:hover{
+.link-blanco:hover {
 	color: white;
 }
 
 /* PARA CAMBIAR EL DISEÑO DEL SCROLL */
 nav::-webkit-scrollbar {
-    -webkit-appearance: none;
+	-webkit-appearance: none;
 }
 
 nav::-webkit-scrollbar:vertical {
-    width: 9px;
+	width: 9px;
 }
 
 nav::-webkit-scrollbar-thumb {
-    background-color: #7B7979;
-    border-radius: 20px;
-    border: 2px solid #AEA9A9;
+	background-color: #7b7979;
+	border-radius: 20px;
+	border: 2px solid #aea9a9;
 }
 
 @media (max-width: 768px) {
-	#tira.m-active{
+	#tira.m-active {
 		margin-left: 250px;
 	}
-	.sidebar.m-active{
+	.sidebar.m-active {
 		margin-left: 0px;
 		z-index: 999;
 	}
-	.fondo-nav{
+	.fondo-nav {
 		position: fixed;
 		top: 0;
 		left: 0;
 		right: 0;
 		bottom: 0;
 		z-index: 998;
-		background-color: rgba(0,0,0,0.5);
+		background-color: rgba(0, 0, 0, 0.5);
 	}
 }
 
 @media (min-width: 768px) {
-	.main{
+	.main {
 		margin-left: 250px;
 	}
-	.sidebar{
+	.sidebar {
 		margin-left: 0px;
 	}
-	#tira{
+	#tira {
 		margin-left: 250px;
 	}
 }
