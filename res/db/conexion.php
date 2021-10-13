@@ -24,7 +24,7 @@ class Conexion
     private function __construct()
     {
         try {
-            $this->dbh = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->nombreBaseDatos, $this->usuario, $this->password);
+            $this->dbh = new PDO("sqlsrv:server=$this->host;database=$this->nombreBaseDatos", $this->usuario, $this->password);
             $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             echo $e->getMessage();
