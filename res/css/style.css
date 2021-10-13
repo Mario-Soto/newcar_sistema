@@ -125,10 +125,11 @@ footer {
 	position: fixed;
 	top: 0;
 	left: 0;
-	height: 100vh;
+	height: 100%;
 	transition: all 0.3s;
 	color: white;
 	margin-left: -250px;
+	padding: 1rem 1rem 30px 1rem;
 }
 .title {
 	font-size: 1.5em;
