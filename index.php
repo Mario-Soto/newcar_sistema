@@ -5,7 +5,7 @@
 -->
 
 <!DOCTYPE html>
-<html lang="es" class="h-100">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -15,8 +15,8 @@
     <title>New Car</title>
 </head>
 
-<body class="h-100">
-    <div class="contenedor h-100">
+<body>
+    <div class="contenedor">
         <div id="fondo-nav">
             <nav id="nav" class="d-flex flex-column flex-shrink-0 p-3 sidebar">
                 <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">

@@ -1,6 +1,10 @@
 @import url(all.css);
 @import url(bootstrap.css);
 
+nav{
+	overflow-y: auto;
+}
+
 a{
     color: inherit;
     text-decoration: none;
@@ -165,6 +169,21 @@ nav ul li a.btn:hover{
 #tira{
 	margin-left: 0;
 	transition: all 0.3s;
+}
+
+/* PARA CAMBIAR EL DISEÑO DEL SCROLL */
+nav::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+nav::-webkit-scrollbar:vertical {
+    width: 9px;
+}
+
+nav::-webkit-scrollbar-thumb {
+    background-color: #7B7979;
+    border-radius: 20px;
+    border: 2px solid #AEA9A9;
 }
 
 @media (max-width: 768px) {
