@@ -27,11 +27,17 @@ if (isset($_SESSION['usuario'])) :
             <div class="row">
                 <div class="col-6 mt-3 mx-auto">
                     <label for="contraseña" class="form-label">Contraseña</label>
-                    <input type="password" name="contraseña" id="contraseña" class="form-control" required>
+                    <div class="input-group" id="mos_oc_pass">
+                        <input type="password" name="contraseña" id="contraseña" class="form-control" required>
+                        <span class="input-group-text"><i class="fas fa-eye-slash" role="button"></i></span>
+                    </div>
                 </div>
                 <div class="col-6 mt-3 mx-auto">
                     <label for="contraseña2" class="form-label">Confirmar contraseña</label>
-                    <input type="password" name="contraseña2" id="contraseña2" class="form-control" required>
+                    <div class="input-group" id="mos_oc_pass2">
+                        <input type="password" name="contraseña2" id="contraseña2" class="form-control" required>
+                        <span class="input-group-text"><i class="fas fa-eye-slash" role="button"></i></span>
+                    </div>
                 </div>
             </div>
             <div class="col-12 col-lg-6 mt-3">
@@ -41,7 +47,7 @@ if (isset($_SESSION['usuario'])) :
             <div class="col-12 col-lg-6 mt-3">
                 <label for="rol" class="form-label">Rol</label>
                 <?php
-                
+
                 ?>
             </div>
             <div class="row mt-4">
