@@ -1,22 +1,6 @@
 @import url(all.css);
 @import url(bootstrap.css);
 
-@font-face {
-    font-family: "Birthstone";
-    src: url("../webfonts/Birthstone-Regular.ttf");
-}
-
-@font-face {
-    font-family: "Ephesis", cursive;
-    src: url("../webfonts/Ephesis-Regular.ttf");
-}
-
-nav{
-	padding: 10px;
-    background-color: #bfd1d7;
-    background-color: #ffeec4;
-}
-
 a{
     color: inherit;
     text-decoration: none;
@@ -26,70 +10,9 @@ a:hover{
     color: inherit;
 }
 
-.logo{
-    vertical-align: top;
-}
-
-li[class^="nav"]{
-	margin-right: 15px;
-	padding: 0;
-	width: auto;
-}
-
-li a[class^="nav"]{
-	padding: 8px;
-	padding-right: 18px;
-	width: 100%;
-	height: 100%;
-    color: white;
-}
-
-li a[class^="nav"]:hover{
-	text-decoration: none;
-	color: #3b6a7a !important;
-	border-radius: 5px;
-	background-color: var(--v1);
-}
-
-.navbar-brand{
-	margin-left: 0;
-}
-
-.navbar-toggler{
-    margin-right: 15px;
-}
-
 .fixed-top{
 	position: fixed;
 	top: 0;
-}
-
-.fixed-theme{
-	transition: 0.8s;
-}
-
-.container-fluid{
-	width: auto;
-	margin-right: 0;
-}
-
-.tira{
-	background-color: #6e77a2;
-    background-color: #3b6a7a;
-	font-size: 2rem;
-	text-align: center;
-	color: white;
-	letter-spacing: 10px;
-	word-spacing: 10px;
-    font-family: "Birthstone";
-}
-
-.mt1{
-    margin-top: 146px;
-}
-
-.mt2{
-    margin-top: 93px;
 }
 
 footer{
@@ -103,49 +26,12 @@ footer{
 	text-align: justify;
 }
 
-.card-dec-1{
-	background-color: #ffeec4;
-	box-shadow: 2px 2px 2px #eec396;
-	transition: all 0.25s;
-}
-
-.card-dec-2{
-	background-color: #bfd1d7;
-	box-shadow: 2px 2px 2px #608795;
-	transition: all 0.25s;
-}
-
-.card-dec-3{
-	background-color: #ffcec4;
-	box-shadow: 2px 2px 2px #eea496;
-	transition: all 0.25s;
-}
-
-.card-dec-1:hover, .card-dec-2:hover, .card-dec-3:hover{
-	transform: translateY(-5px);
-	box-shadow: 0 12px 16px #3b6a7a;
-}
-
 .row{
 	margin-right: 0;
 }
 
 .list-group-item{
 	background-color: inherit;
-}
-
-.card img{
-	width: 120px;
-}
-
-.card-persona{
-	width: 250px;
-}
-
-.titulo{
-	color: #3b6a7a;
-	border-bottom: 2px solid #608795;
-	border-radius: 5px;
 }
 
 .form-gris{
@@ -214,4 +100,100 @@ footer{
 .btn-conf:hover{
 	background-color: rgba(110, 119, 162, 0.85);
 	border-color: #465185;
+}
+
+/*         */
+/* SISTEMA */
+/*         */
+.bg-c1{
+	background-color: #8dabb5;
+}
+.contenedor{
+	width: 100%;
+}
+.sidebar{
+	width: 250px;
+	background-color: #7B7979;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	transition: all 0.3s;
+	color: white;
+	margin-left: -250px;
+}
+.title{
+	font-size: 1.5em;
+	color: white;
+}
+.sidebar.m-active{
+	margin-left: 0px;
+}
+
+.bg-g2{
+	background-color: #7B7979;
+}
+nav ul li a.btn{
+	width: 100%;
+	color: white;
+	text-align: left;
+	border-bottom: 1px solid white;
+}
+nav ul li a.btn:hover{
+	background-color: #AEA9A9;
+	color: black;
+}
+.sub-list{
+	margin-left: 50px;
+}
+.sub-list a:hover{
+	border-bottom: 0.5px solid white;
+}
+.main{
+	margin-left: 0px;
+	transition: all 0.3s;
+}
+
+.m-active{
+	margin-left: 250px;
+}
+
+.m-tira{
+	margin-top: 50px;
+}
+
+#tira{
+	margin-left: 0;
+	transition: all 0.3s;
+}
+
+@media (max-width: 768px) {
+	#tira.m-active{
+		margin-left: 250px;
+	}
+	.sidebar.m-active{
+		margin-left: 0px;
+		z-index: 999;
+	}
+	.fondo-nav{
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 998;
+		background-color: rgba(0,0,0,0.5);
+	}
+}
+
+@media (min-width: 768px) {
+	.main{
+		margin-left: 250px;
+	}
+	.sidebar{
+		margin-left: 0px;
+	}
+	#tira{
+		margin-left: 250px;
+	}
 }
