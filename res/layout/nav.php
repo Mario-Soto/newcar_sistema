@@ -1,6 +1,6 @@
 <div class="contenedor">
     <div id="fondo-nav">
-        <nav id="nav" class="d-flex flex-column flex-shrink-0 p-3 sidebar">
+        <nav id="nav" class="d-flex flex-column flex-shrink-0 p-3 pb-5 sidebar">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
                 <img width="120px" src="res/images/new_car-logo.png" alt="Logo de NewCar">
                 <span class="fs-5 fw-semibold ms-1">New Car</span>
