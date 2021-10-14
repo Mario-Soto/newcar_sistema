@@ -63,3 +63,37 @@ $("#registrar").on("click", function (event) {
 		});
 	}
 });
+
+$("#auto").change(function () {
+	$("#costo").prop("selectedIndex",$("#auto").prop("selectedIndex"));
+	total = $("#costo").val()*$("#cantidad").val();
+	if($("#emplacar").prop("checked")){
+		total = total + 5000;
+	}
+	$("#precio").val(total);
+});
+
+$("#cantidad").change(function () {
+	total = $("#costo").val()*$("#cantidad").val();
+	if($("#emplacar").prop("checked")){
+		total = total + 5000;
+	}
+	$("#precio").val(total);
+});
+
+const valores = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+
+$("#emplacar").change(function () {
+	total = $("#costo").val()*$("#cantidad").val();
+	placa = '';
+	if($("#emplacar").prop("checked")){
+		total = total + 5000;
+		for(var i = 0; i < 7; i++){
+			placa += valores.charAt(Math.floor(Math.random()*valores.length));
+		}
+	}else{
+		placa = null;
+	}
+	$("#precio").val(total);
+	$("#placas").val(placa);
+});

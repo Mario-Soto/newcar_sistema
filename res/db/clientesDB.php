@@ -21,4 +21,21 @@ class ClientesDB
             echo $e->getMessage();
         }
     }
+
+    public function getClientes()
+    {
+        $conexion = Conexion::getInstancia();
+        $dbh = $conexion->getDbh();
+        try {
+            $consulta = "SELECT idCliente as id, nombre, apellido, rfc, credito FROM clientes ORDER BY apellido";
+            $stmt = $dbh->prepare($consulta);
+            $stmt->setFetchMode(PDO::FETCH_BOTH);
+            $stmt->execute();
+            $clientes = $stmt->fetchAll();
+            $dbh = null;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        return $clientes;
+    }
 }

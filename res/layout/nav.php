@@ -25,7 +25,7 @@
                     </div>
                 </li>
                 <li class="mb-1">
-                    <a href="ventas.php" class="btn rounded collapsed">VENTAS</a>
+                    <a href="ventas/realizar.php" class="btn rounded collapsed">VENTAS</a>
                 </li>
                 <li class="mb-1">
                     <a href="inventario.php" class="btn rounded collapsed">INVENTARIO</a>
