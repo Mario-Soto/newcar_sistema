@@ -20,4 +20,21 @@ class MarcasDB
         }
         return $marcas;
     }
+
+    public function insertMarca($nombre, $pais)
+    {
+        $conexion = Conexion::getInstancia();
+        $dbh = $conexion->getDbh();
+        try {
+            $consulta = "INSERT INTO marca (nombre, paisOrigen) VALUES (?, ?)";
+            $stmt = $dbh->prepare($consulta);
+            $stmt->bindParam(1, $nombre);
+            $stmt->bindParam(2, $pais);
+            $stmt->setFetchMode(PDO::FETCH_BOTH);
+            $stmt->execute();
+            $dbh = null;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 }

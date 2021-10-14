@@ -22,3 +22,31 @@ $("#mos_oc_pass i").click(function (event) {
 		$("#mos_oc_pass i").addClass("fa-eye");
 	}
 });
+
+
+$("#mos_oc_pass2 i").click(function (event) {
+	event.preventDefault();
+	if ($("#mos_oc_pass2 input").attr("type") == "text") {
+		$("#mos_oc_pass2 input").attr("type", "password");
+		$("#mos_oc_pass2 i").addClass("fa-eye-slash");
+		$("#mos_oc_pass2 i").removeClass("fa-eye");
+	} else if ($("#mos_oc_pass2 input").attr("type") == "password") {
+		$("#mos_oc_pass2 input").attr("type", "text");
+		$("#mos_oc_pass2 i").removeClass("fa-eye-slash");
+		$("#mos_oc_pass2 i").addClass("fa-eye");
+	}
+});
+
+$("#nuevo, #usado").change(function() {
+	if($("#nuevo").is(":checked")){
+		$("#kilometraje").val("0");
+		$("#kilometraje").attr("disabled", true);
+	}else{
+		$("#kilometraje").val(null);
+		$("#kilometraje").attr("disabled", false);
+	}
+});
+
+$(".solo-num").on("input", function(){
+	this.value = this.value.replace(/[^0-9]/g,'');
+});

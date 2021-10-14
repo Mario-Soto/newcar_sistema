@@ -12,8 +12,8 @@ if (isset($_SESSION['usuario'])) :
             </legend>
             <div class="col-12 col-lg-6 mt-3">
                 <label for="marca" class="form-label">Marca</label>
-                <select name="marca" id="marca" class="form-select">
-                    <option selected>Selecciona...</option>
+                <select name="marca" id="marca" class="form-select" required>
+                    <option>Selecciona...</option>
                     <?php
                     include '../res/db/marcasDB.php';
                     $marcasdb = new MarcasDB();
@@ -26,8 +26,8 @@ if (isset($_SESSION['usuario'])) :
             </div>
             <div class="col-12 col-lg-6 mt-3">
                 <label for="color" class="form-label">Color</label>
-                <select name="color" id="color" class="form-select">
-                    <option selected>Selecciona...</option>
+                <select name="color" id="color" class="form-select" required>
+                    <option>Selecciona...</option>
                     <?php
                     include '../res/db/catalogosDB.php';
                     $catalogosdb = new CatalogosDB();
@@ -40,29 +40,34 @@ if (isset($_SESSION['usuario'])) :
             </div>
             <div class="col-12 mt-3">
                 <label for="modelo" class="form-label">Modelo</label>
-                <select name="modelo" id="modelo" class="form-select">
-                    <option selected>Selecciona...</option>
+                <select name="modelo" id="modelo" class="form-select" required>
+                    <option>Selecciona...</option>
                     <?php
                     include '../res/db/modelosDB.php';
                     $modelosdb = new ModelosDB();
                     $modelos = $modelosdb->getModelos();
                     foreach ($modelos as $modelo) :
                     ?>
-                        <option value="<?= $modelo['id'] ?>"><?= $modelo['nombre'] . '( ' . $modelo['año'] . ' )' . ' - ' . $modelo['transmision'] ?></option>
+                        <option value="<?= $modelo['id'] ?>"><?= $modelo['nombre'] . ' (' . $modelo['año'] . ')' . ' - ' . $modelo['transmision'] ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
             <div class="col-6 mt-3">
                 <label for="estado" class="form-label">Estado</label>
-                <select name="estado" id="estado" class="form-select">
-                    <option selected>Selecciona...</option>
-                    <option value="0">Nuevo</option>
-                    <option value="1">Usado</option>
-                </select>
+                <div class="w-100">
+                    <div class="form-check form-check-inline">
+                        <input type="radio" name="estado" id="nuevo" class="form-check-input" value="0" checked>
+                        <label for="nuevo" class="form-check-label">Nuevo</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" name="estado" id="usado" class="form-check-input" value="1">
+                        <label for="usado" class="form-check-label">Usado</label>
+                    </div>
+                </div>
             </div>
             <div class="col-6 mt-3">
                 <label for="kilometraje" class="form-label">Kilometraje</label>
-                <input type="text" name="kilometraje" id="kilometraje" class="form-control" placeholder="2500" disabled>
+                <input type="text" name="kilometraje" id="kilometraje" class="form-control solo-num" placeholder="2500" value="0" disabled required>
             </div>
             <div class="col-12 mt-3">
                 <label for="descripcion" class="form-label">Descripcion</label>
@@ -72,7 +77,7 @@ if (isset($_SESSION['usuario'])) :
                 <label for="precio" class="form-label">Precio</label>
                 <div class="input-group">
                     <span class="input-group-text">$</span>
-                    <input type="text" name="precio" id="precio" class="form-control" placeholder="1,500,000">
+                    <input type="text" name="precio" id="precio" class="form-control solo-num" placeholder="1,500,000" required>
                     <span class="input-group-text">.00</span>
                 </div>
             </div>
@@ -82,7 +87,7 @@ if (isset($_SESSION['usuario'])) :
             </div>
             <div class="row mt-4">
                 <div class="col-6 text-center">
-                    <input type="button" value="Limpiar" class="btn btn-limpiar col-12 col-lg-10">
+                    <input type="reset" value="Limpiar" class="btn btn-limpiar col-12 col-lg-10">
                 </div>
                 <div class="col-6 text-center">
                     <input type="submit" value="Enviar" class="btn btn-submit col-12 col-lg-10">
@@ -102,5 +107,6 @@ else :
 <?php
 endif;
 include '../res/layout/scripts.html';
+include 'alerta_insertado.php';
 include '../res/layout/cierre.html';
 ?>

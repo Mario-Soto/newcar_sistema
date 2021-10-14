@@ -6,7 +6,7 @@ if (isset($_SESSION['usuario'])) :
     include '../res/layout/header.html';
 ?>
     <div class="col-12 col-sm-10 col-md-9 col-lg-8 mx-auto mb-5">
-        <form action="php/inserta_auto.php" method="post" class="row bg-g p-3">
+        <form action="php/inserta_cliente.php" method="post" class="row bg-g p-3">
             <legend class="mx-auto text-center mb-0">
                 <h2>ALTAS DE CLIENTES</h2>
             </legend>
@@ -30,7 +30,7 @@ if (isset($_SESSION['usuario'])) :
             </div>
             <div class="row mt-4">
                 <div class="col-6 text-center">
-                    <input type="button" value="Limpiar" class="btn btn-limpiar col-12 col-lg-10">
+                    <input type="reset" value="Limpiar" class="btn btn-limpiar col-12 col-lg-10">
                 </div>
                 <div class="col-6 text-center">
                     <input type="submit" value="Enviar" class="btn btn-submit col-12 col-lg-10">
@@ -50,5 +50,6 @@ else :
 <?php
 endif;
 include '../res/layout/scripts.html';
+include 'alerta_insertado.php';
 include '../res/layout/cierre.html';
 ?>

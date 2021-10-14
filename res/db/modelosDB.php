@@ -21,4 +21,23 @@ class ModelosDB
         }
         return $modelos;
     }
+
+    public function insertModelo($nombre, $version, $año, $transmision)
+    {
+        $conexion = Conexion::getInstancia();
+        $dbh = $conexion->getDbh();
+        try {
+            $consulta = "INSERT INTO modelo (nombre, version, año, idTransmision) VALUES (?, ?, ?, ?)";
+            $stmt = $dbh->prepare($consulta);
+            $stmt->bindParam(1, $nombre);
+            $stmt->bindParam(2, $version);
+            $stmt->bindParam(3, $año);
+            $stmt->bindParam(4, $transmision);
+            $stmt->setFetchMode(PDO::FETCH_BOTH);
+            $stmt->execute();
+            $dbh = null;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 }

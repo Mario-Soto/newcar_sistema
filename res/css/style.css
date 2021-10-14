@@ -1,5 +1,6 @@
 @import url(all.css);
 @import url(bootstrap.css);
+@import url(sweetalert2.css);
 
 nav {
 	overflow-y: auto;

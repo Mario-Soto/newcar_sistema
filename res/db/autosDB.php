@@ -1,29 +1,8 @@
 <?php
 include_once 'conexion.php';
 
-class UsuariosDB
+class AutosDB
 {
-    public function getUsuario($usuario)
-    {
-        $conexion = Conexion::getInstancia();
-        $dbh = $conexion->getDbh();
-        try {
-            $consulta = "SELECT idUsuario as id, nombre, apellido, fotografia, usuario, 
-            contraseña, u.tipo as idTipo, t.tipo 
-            FROM usuario u INNER JOIN tipoUsuario t ON u.tipo = t.idTipo 
-            WHERE usuario = ?";
-            $stmt = $dbh->prepare($consulta);
-            $stmt->bindParam(1, $usuario);
-            $stmt->setFetchMode(PDO::FETCH_BOTH);
-            $stmt->execute();
-            $usuarios = $stmt->fetch();
-            $dbh = null;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
-        return $usuarios;
-    }
-
     private function insertaFoto($imagen, $id)
     {
         $direccion = "../res/upload/autos/";
@@ -55,28 +34,31 @@ class UsuariosDB
         return $nombreArchivo;
     }
 
-    public function insertUsuario($nombre, $apellido, $foto, $usuario, $contraseña, $tipo)
+    public function insertAuto($marca, $modelo, $color, $estado, $kilometraje, $descripcion, $precio, $foto)
     {
         $conexion = Conexion::getInstancia();
         $dbh = $conexion->getDbh();
         try {
-            $consulta = "INSERT INTO usuario (nombre, apellido, usuario, contraseña, tipo) VALUES (?, ?, ?, ?, ?)";
+            $consulta = "INSERT INTO autos (idMarca, idModelo, idColor, kilometraje, estado, descripcion, precio) VALUES (?, ?, ?, ?, ?, ?, ?)";
             $stmt = $dbh->prepare($consulta);
-            $stmt->bindParam(1, $nombre);
-            $stmt->bindParam(2, $apellido);
-            $stmt->bindParam(3, $usuario);
-            $contraseña = password_hash($contraseña, PASSWORD_DEFAULT);
-            $stmt->bindParam(4, $contraseña);
-            $stmt->bindParam(5, $tipo);
+            $stmt->bindParam(1, $marca);
+            $stmt->bindParam(2, $modelo);
+            $stmt->bindParam(3, $color);
+            $stmt->bindParam(4, $kilometraje);
+            $stmt->bindParam(5, $estado);
+            $stmt->bindParam(6, $descripcion);
+            $stmt->bindParam(7, $precio);
             $stmt->setFetchMode(PDO::FETCH_BOTH);
             $stmt->execute();
+            print($foto['name'].'<br>');
             if ($foto['name'] <> null) {
-                $consulta = "SELECT TOP(1) idUsuario as id FROM usuario ORDER BY id desc";
+                $consulta = "SELECT TOP(1) idAuto as id FROM autos ORDER BY id desc";
                 $stmt = $dbh->prepare($consulta);
                 $stmt->execute();
                 $id = $stmt->fetch();
+                print($id[0].'<br>');
                 $imagen = $this->insertaFoto($foto, $id[0]);
-                $consulta = "UPDATE usuario SET fotografia = ? WHERE idUsuario = ?";
+                $consulta = "UPDATE autos SET fotografia = ? WHERE idAuto = ?";
                 $stmt = $dbh->prepare($consulta);
                 $stmt->bindParam(1, $imagen);
                 $stmt->bindParam(2, $id[0]);
