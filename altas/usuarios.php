@@ -13,11 +13,11 @@ if (isset($_SESSION['usuario'])) :
             <div class="row">
                 <div class="col-12 col-lg-6 mt-3">
                     <label for="nombre" class="form-label">Nombre</label>
-                    <input type="text" name="nombre" id="nombre" class="form-control" required>
+                    <input type="text" name="nombre" id="nombre" class="form-control" value="<?= isset($_SESSION['form-usuario'])?$_SESSION['form-usuario']['nombre']:null; ?>" required>
                 </div>
                 <div class="col-12 col-lg-6 mt-3">
                     <label for="apellido" class="form-label">Apellido</label>
-                    <input type="text" name="apellido" id="apellido" class="form-control" required>
+                    <input type="text" name="apellido" id="apellido" class="form-control" value="<?= isset($_SESSION['form-usuario'])?$_SESSION['form-usuario']['apellido']:null; ?>" required>
                 </div>
             </div>
             <div class="row">
@@ -44,19 +44,19 @@ if (isset($_SESSION['usuario'])) :
             </div>
             <div class="col-12 col-lg-6 mt-3">
                 <label for="fotografia" class="form-label">Fotografía</label>
-                <input type="file" name="fotografia" id="fotografia" class="form-control" accept="image/*">
+                <input type="file" name="fotografia" id="fotografia" class="form-control" accept="image/*" >
             </div>
             <div class="col-12 col-lg-6 mt-3">
                 <label for="rol" class="form-label">Rol</label>
                 <select name="rol" id="rol" class="form-select">
-                    <option selected>Seleccione...</option>
+                    <option <?= isset($_SESSION['form-usuario'])?null:'selected'; ?> >Seleccione...</option>
                     <?php
                     include '../res/db/catalogosDB.php';
                     $catalogosdb = new CatalogosDB();
                     $roles = $catalogosdb->getRoles();
                     foreach ($roles as $rol) :
                     ?>
-                        <option value="<?= $rol['id'] ?>"><?= $rol['tipo'] ?></option>
+                        <option value="<?= $rol['id'] ?>" <?= isset($_SESSION['form-usuario'])?($_SESSION['form-usuario']['rol'] == $rol['id']?'selected':null):null; ?> ><?= $rol['tipo'] ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -65,13 +65,14 @@ if (isset($_SESSION['usuario'])) :
                     <input type="reset" value="Limpiar" class="btn btn-limpiar col-12 col-lg-10">
                 </div>
                 <div class="col-6 text-center">
-                    <input type="submit" value="Enviar" class="btn btn-submit col-12 col-lg-10">
+                    <input type="submit" id="registrar" value="Enviar" class="btn btn-submit col-12 col-lg-10">
                 </div>
             </div>
         </form>
     </div>
 
 <?php
+    unset($_SESSION['form-usuario']);
     include '../res/layout/divs.html';
 else :
     include '../res/layout/tira.html'

@@ -67,7 +67,7 @@ if (isset($_SESSION['usuario'])) :
             </div>
             <div class="col-6 mt-3">
                 <label for="kilometraje" class="form-label">Kilometraje</label>
-                <input type="text" name="kilometraje" id="kilometraje" class="form-control solo-num" placeholder="2500" value="0" disabled required>
+                <input type="text" name="kilometraje" id="kilometraje" class="form-control solo-num" placeholder="2,500" disabled>
             </div>
             <div class="col-12 mt-3">
                 <label for="descripcion" class="form-label">Descripcion</label>

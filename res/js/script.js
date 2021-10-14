@@ -39,14 +39,27 @@ $("#mos_oc_pass2 i").click(function (event) {
 
 $("#nuevo, #usado").change(function() {
 	if($("#nuevo").is(":checked")){
-		$("#kilometraje").val("0");
-		$("#kilometraje").attr("disabled", true);
+		$("#kilometraje").prop("disabled", true);
+		$("#kilometraje").prop("required", false);
 	}else{
-		$("#kilometraje").val(null);
-		$("#kilometraje").attr("disabled", false);
+		$("#kilometraje").prop("disabled", false);
+		$("#kilometraje").prop("required", true);
 	}
 });
 
-$(".solo-num").on("input", function(){
-	this.value = this.value.replace(/[^0-9]/g,'');
+$(".solo-num").number(true, 0);
+
+$("#registrar").on("click", function (event) {
+	pass1 = $("#contraseña").val();
+	pass2 = $("#contraseña2").val();
+	if (pass1 == pass2) {
+		return;
+	} else {
+		event.preventDefault();
+		Swal.fire({
+			icon: "error",
+			title: "Error...",
+			text: "Las contraseñas no coinciden",
+		});
+	}
 });

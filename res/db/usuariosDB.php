@@ -24,6 +24,28 @@ class UsuariosDB
         return $usuarios;
     }
 
+    public function existeUsuario($usuario){
+        $conexion = Conexion::getInstancia();
+        $dbh = $conexion->getDbh();
+        try {
+            $consulta = "SELECT count(*) FROM usuario WHERE usuario.usuario = ?";
+            $stmt = $dbh->prepare($consulta);
+            $stmt->bindParam(1, $usuario);
+            $stmt->setFetchMode(PDO::FETCH_BOTH);
+            $stmt->execute();
+            $usuarios = $stmt->fetch();
+            if($usuarios[0] == 0){
+                $val = 0;
+            }else{
+                $val = 1;
+            }
+            $dbh = null;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        return $val;
+    }
+
     private function insertaFoto($imagen, $id)
     {
         $direccion = "../res/upload/autos/";
