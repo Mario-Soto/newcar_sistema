@@ -31,7 +31,7 @@ if (isset($_SESSION['usuario'])) :
             <th></th>
             <th>Auto</th>
             <th>Transmisión</th>
-            <th>Color</th>
+            <th class="d-none d-sm-table-cell">Color</th>
             <th>Estado</th>
             <th>Precio</th>
         </tr>
@@ -42,7 +42,7 @@ if (isset($_SESSION['usuario'])) :
             <td class="text-center"><a href="inventario.php?id=<?= $auto['id']?>"><i class="far fa-eye"></i></a></td>
             <td><?= $auto['marca'].' '.$auto['modelo'].' ('.$auto['año'].')'?></td>
             <td><?= $auto['transmision'] ?></td>
-            <td><?= $auto['color'] ?></td>
+            <td class="d-none d-sm-table-cell"><?= $auto['color'] ?></td>
             <td><?= $auto['estado']==1?'Usado - '.$auto['kilometraje'].' kms':'Nuevo'?></td>
             <td>$ <span class="solo-num"><?= $auto['precio'] ?></span></td>
         </tr>
