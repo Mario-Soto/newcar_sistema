@@ -24,7 +24,7 @@ if (isset($_SESSION['usuario'])) :
             </div>
             <div class="col-6 mt-3 d-flex justify-content-center">
                 <div class="form-check form-switch align-self-center">
-                    <input type="checkbox" name="credito" id="credito" class="form-check-input form-check-1">
+                    <input type="checkbox" name="credito" id="credito" class="form-check-input form-check-1" value="1">
                     <label for="credito" class="form-check-label">Crédito para financiamiento</label>
                 </div>
             </div>
