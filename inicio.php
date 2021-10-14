@@ -5,7 +5,7 @@ if (isset($_SESSION['usuario'])) :
     include 'res/layout/nav.php';
     include 'res/layout/header.html';
 ?>
-<h2>Bienvenido, <?=$_SESSION['usuario']['nombre']?></h2>
+<h2>Hola, <?=$_SESSION['usuario']['nombre']?></h2>
 
 <?php
     include 'res/layout/divs.html';
