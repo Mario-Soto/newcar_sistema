@@ -16,17 +16,34 @@
                     </a>
                     <div class="collapse" id="altas">
                         <ul class="sub-list list-unstyled fw-normal pb-1 small">
-                            <li><a href="altas/autos.php" class="rounded">Autos</a></li>
-                            <li><a href="altas/marcas.php" class="rounded mt-1">Marcas</a></li>
-                            <li><a href="altas/modelos.php" class="rounded mt-1">Modelos</a></li>
-                            <li><a href="altas/clientes.php" class="rounded mt-1">Clientes</a></li>
-                            <li><a href="altas/usuarios.php" class="rounded mt-1">Usuarios</a></li>
+                            <?php
+                            if ($_SESSION['usuario']['idTipo'] == 2 || $_SESSION['usuario']['idTipo'] == 1) :
+                            ?>
+                                <li><a href="altas/autos.php" class="rounded">Autos</a></li>
+                                <li><a href="altas/marcas.php" class="rounded mt-1">Marcas</a></li>
+                                <li><a href="altas/modelos.php" class="rounded mt-1">Modelos</a></li>
+                            <?php
+                            endif;
+                            if ($_SESSION['usuario']['idTipo'] == 3 || $_SESSION['usuario']['idTipo'] == 1) :
+                            ?>
+                                <li><a href="altas/clientes.php" class="rounded mt-1">Clientes</a></li>
+                            <?php
+                            endif;
+                            if ($_SESSION['usuario']['idTipo'] == 1) : ?>
+                                <li><a href="altas/usuarios.php" class="rounded mt-1">Usuarios</a></li>
+                            <?php endif; ?>
                         </ul>
                     </div>
                 </li>
-                <li class="mb-1">
-                    <a href="ventas/realizar.php" class="btn rounded collapsed">VENTAS</a>
-                </li>
+                <?php
+                if ($_SESSION['usuario']['idTipo'] == 3 || $_SESSION['usuario']['idTipo'] == 1) :
+                ?>
+                    <li class="mb-1">
+                        <a href="ventas/realizar.php" class="btn rounded collapsed">VENTAS</a>
+                    </li>
+                <?php
+                endif;
+                ?>
                 <li class="mb-1">
                     <a href="inventario.php" class="btn rounded collapsed">INVENTARIO</a>
                 </li>
@@ -40,8 +57,8 @@
             <hr>
             <div class="dropdown">
                 <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="res/upload/users/<?=$_SESSION['usuario']['fotografia']<>null?$_SESSION['usuario']['fotografia']:'default.png'; ?>" alt="Imagen usuario" width="32" height="32" class="rounded-circle me-2">
-                    <strong><?=$_SESSION['usuario']['usuario'] ?></strong>
+                    <img src="res/upload/users/<?= $_SESSION['usuario']['fotografia'] <> null ? $_SESSION['usuario']['fotografia'] : 'default.png'; ?>" alt="Imagen usuario" width="32" height="32" class="rounded-circle me-2">
+                    <strong><?= $_SESSION['usuario']['usuario'] ?></strong>
                 </a>
                 <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
                     <li><a class="dropdown-item" href="#">New project...</a></li>

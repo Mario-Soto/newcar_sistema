@@ -48,10 +48,10 @@ class UsuariosDB
 
     private function insertaFoto($imagen, $id)
     {
-        $direccion = "../res/upload/autos/";
+        $direccion = "../res/upload/users/";
         $archivo = basename($imagen['name']);
         list($nombre, $extension) = explode('.', $archivo);
-        $nombreArchivo = implode('.', ["auto_$id", $extension]);
+        $nombreArchivo = implode('.', ["user_$id", $extension]);
         $path = $direccion . $nombreArchivo;
         $tipo = pathinfo($path, PATHINFO_EXTENSION);
         $status = " ";
