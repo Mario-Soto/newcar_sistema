@@ -25,6 +25,19 @@ class AlertasDB {
         SCRIPT;
     }
 
+    public function nuevaAlertaImagen($titulo, $texto, $imagen, $alt){
+        print<<<"SCRIPT"
+        <script>
+            Swal.fire({
+                title: '$titulo',
+                html: '$texto',
+                imageUrl: 'res/upload/autos/$imagen',
+                imageWidth: 400,
+                imageAlt: '$alt'
+            })
+        </script>
+        SCRIPT;
+    }
 }
 
 ?>

@@ -25,16 +25,16 @@
                     </div>
                 </li>
                 <li class="mb-1">
-                    <a class="btn rounded collapsed">VENTAS</a>
+                    <a href="ventas.php" class="btn rounded collapsed">VENTAS</a>
                 </li>
                 <li class="mb-1">
-                    <a class="btn rounded collapsed">INVENTARIO</a>
+                    <a href="inventario.php" class="btn rounded collapsed">INVENTARIO</a>
                 </li>
                 <li class="mb-1">
                     <a class="btn rounded collapsed">TICKETS</a>
                 </li>
                 <li class="mb-1">
-                    <a class="btn rounded collapsed">SITIO WEB</a>
+                    <a href="https://newcarconcesionaria.azurewebsites.net/" target="_blank" class="btn rounded collapsed">SITIO WEB</a>
                 </li>
             </ul>
             <hr>
