@@ -90,7 +90,7 @@
                     <strong><?= $_SESSION['usuario']['usuario'] ?></strong>
                 </a>
                 <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                    <li><a class="dropdown-item" href="#">Perfil</a></li>
+                    <li><a class="dropdown-item" href="perfil.php">Perfil</a></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>

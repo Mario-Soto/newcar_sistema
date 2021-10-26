@@ -49,7 +49,7 @@ class VentasDB
             $stmt->bindParam(1, $busca);
             $stmt->setFetchMode(PDO::FETCH_BOTH);
             $stmt->execute();
-            $ventas = $stmt->fetch();
+            $ventas = $stmt->fetchAll();
             $dbh = null;
         } catch (PDOException $e) {
             echo $e->getMessage();

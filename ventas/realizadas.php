@@ -55,7 +55,7 @@ if (isset($_SESSION['usuario'])) :
                         <?= $venta['formaPago'] == 1 ? 'Efectivo' : 'Crédito' ?>
                     </td>
                     <td class="align-middle">
-                        <span class="solo-num"><?= $venta['total'] ?></span>
+                        $<span class="solo-num"><?= $venta['total'] ?></span>
                     </td>
                 </tr>
             <?php
