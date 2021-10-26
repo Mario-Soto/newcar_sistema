@@ -97,7 +97,7 @@ class MarcasDB
             $stmt->bindParam(1, $busca);
             $stmt->setFetchMode(PDO::FETCH_BOTH);
             $stmt->execute();
-            $marca = $stmt->fetch();
+            $marca = $stmt->fetchAll();
             $dbh = null;
         } catch (PDOException $e) {
             echo $e->getMessage();

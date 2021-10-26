@@ -101,7 +101,7 @@ class ClientesDB
             $stmt->bindParam(1, $busca);
             $stmt->setFetchMode(PDO::FETCH_BOTH);
             $stmt->execute();
-            $clientes = $stmt->fetch();
+            $clientes = $stmt->fetchAll();
             $dbh = null;
         } catch (PDOException $e) {
             echo $e->getMessage();

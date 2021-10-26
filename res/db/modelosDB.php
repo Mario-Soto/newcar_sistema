@@ -38,6 +38,25 @@ class ModelosDB
         return $modelos;
     }
 
+    public function buscaModelo($busca)
+    {
+        $conexion = Conexion::getInstancia();
+        $dbh = $conexion->getDbh();
+        try {
+            $consulta = "EXEC buscarModelos ?";
+            $stmt = $dbh->prepare($consulta);
+            $stmt->setFetchMode(PDO::FETCH_BOTH);
+            $busca = "%$busca%";
+            $stmt->bindParam(1, $busca);
+            $stmt->execute();
+            $modelos = $stmt->fetchAll();
+            $dbh = null;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        return $modelos;
+    }
+
     public function insertModelo($nombre, $año, $transmision)
     {
         $conexion = Conexion::getInstancia();
