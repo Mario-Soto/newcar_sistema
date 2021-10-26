@@ -61,6 +61,25 @@ class UsuariosDB
         return $return;
     }
 
+    public function buscaUsuarios($usuario)
+    {
+        $conexion = Conexion::getInstancia();
+        $dbh = $conexion->getDbh();
+        try {
+            $consulta = "EXEC buscarUsuario ?";
+            $stmt = $dbh->prepare($consulta);
+            $usuario = "%$usuario%";
+            $stmt->bindParam(1, $usuario);
+            $stmt->setFetchMode(PDO::FETCH_BOTH);
+            $stmt->execute();
+            $return = $stmt->fetchAll();
+            $dbh = null;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        return $return;
+    }
+
     private function insertaFoto($imagen, $id)
     {
         $direccion = "../res/upload/users/";

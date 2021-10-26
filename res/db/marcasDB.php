@@ -85,4 +85,23 @@ class MarcasDB
         }
         return $marca;
     }
+
+    public function buscaMarca($busca)
+    {
+        $conexion = Conexion::getInstancia();
+        $dbh = $conexion->getDbh();
+        try {
+            $consulta = "EXEC buscarMarca ?";
+            $stmt = $dbh->prepare($consulta);
+            $busca = "%$busca%";
+            $stmt->bindParam(1, $busca);
+            $stmt->setFetchMode(PDO::FETCH_BOTH);
+            $stmt->execute();
+            $marca = $stmt->fetch();
+            $dbh = null;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        return $marca;
+    }
 }

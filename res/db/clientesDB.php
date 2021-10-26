@@ -89,4 +89,23 @@ class ClientesDB
         }
         return $clientes;
     }
+
+    public function buscaCliente($busca)
+    {
+        $conexion = Conexion::getInstancia();
+        $dbh = $conexion->getDbh();
+        try {
+            $consulta = "EXEC buscarClientes ?";
+            $stmt = $dbh->prepare($consulta);
+            $busca = "%$busca%";
+            $stmt->bindParam(1, $busca);
+            $stmt->setFetchMode(PDO::FETCH_BOTH);
+            $stmt->execute();
+            $clientes = $stmt->fetch();
+            $dbh = null;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        return $clientes;
+    }
 }

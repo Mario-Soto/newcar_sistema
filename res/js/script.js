@@ -23,7 +23,6 @@ $("#mos_oc_pass i").click(function (event) {
 	}
 });
 
-
 $("#mos_oc_pass2 i").click(function (event) {
 	event.preventDefault();
 	if ($("#mos_oc_pass2 input").attr("type") == "text") {
@@ -37,11 +36,11 @@ $("#mos_oc_pass2 i").click(function (event) {
 	}
 });
 
-$("#nuevo, #usado").change(function() {
-	if($("#nuevo").is(":checked")){
+$("#nuevo, #usado").change(function () {
+	if ($("#nuevo").is(":checked")) {
 		$("#kilometraje").prop("disabled", true);
 		$("#kilometraje").prop("required", false);
-	}else{
+	} else {
 		$("#kilometraje").prop("disabled", false);
 		$("#kilometraje").prop("required", true);
 	}
@@ -65,33 +64,57 @@ $("#registrar").on("click", function (event) {
 });
 
 $("#auto").change(function () {
-	$("#costo").prop("selectedIndex",$("#auto").prop("selectedIndex"));
-	total = $("#costo").val()*$("#cantidad").val();
-	if($("#emplacar").prop("checked")){
+	$("#costo").prop("selectedIndex", $("#auto").prop("selectedIndex"));
+	total = $("#costo").val();
+	total = parseInt(total.replace(",",""));
+	if ($("#emplacar").prop("checked")) {
 		total = total + 5000;
 	}
 	$("#precio").val(total);
 });
 
-$("#cantidad").change(function () {
-	total = $("#costo").val()*$("#cantidad").val();
-	if($("#emplacar").prop("checked")){
-		total = total + 5000;
+function plazos() {
+	formaPago = $("#forma_pago");
+	plazo = $("#plazos");
+	if (formaPago.val() == 1) {
+		plazo.addClass("d-none");
+		$("#plazo").prop("selectedIndex", 0);
+		$("#plazo").prop('required', false);
+	} else {
+		plazo.removeClass("d-none");
+		$("#plazo").prop('required', true);
 	}
-	$("#precio").val(total);
+}
+
+$("#cliente").change(function () {
+	cliente = $("#cliente");
+	credito = $("#credit");
+	credito.prop("selectedIndex", cliente.prop("selectedIndex"));
+	if (credito.val() == 1) {
+		$("#forma_pago").prop("disabled", false);
+	} else {
+		$("#forma_pago").prop("selectedIndex", 0);
+		$("#forma_pago").prop("disabled", true);
+	}
+	plazos();
 });
 
-const valores = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+$("#forma_pago").change(function () {
+	plazos();
+});
+
+const valores = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
 $("#emplacar").change(function () {
-	total = $("#costo").val()*$("#cantidad").val();
-	placa = '';
-	if($("#emplacar").prop("checked")){
+	total = $("#costo").val();
+	total = parseInt(total.replace(",",""));
+	placa = "";
+	if ($("#emplacar").prop("checked")) {
 		total = total + 5000;
-		for(var i = 0; i < 7; i++){
-			placa += valores.charAt(Math.floor(Math.random()*valores.length));
+		for (var i = 0; i < 7; i++) {
+			placa += valores.charAt(Math.floor(Math.random() * valores.length));
 		}
-	}else{
+	} else {
 		placa = null;
 	}
 	$("#precio").val(total);

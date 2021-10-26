@@ -35,15 +35,44 @@
                         </ul>
                     </div>
                 </li>
+                <li class="mb-1">
+                    <a class="btn dropdown-toggle rounded collapsed" data-bs-toggle="collapse" data-bs-target="#ventas" aria-expanded="false">
+                        VENTAS
+                    </a>
+                    <div class="collapse" id="ventas">
+                        <ul class="sub-list list-unstyled fw-normal pb-1 small">
+                            <?php
+                            if ($_SESSION['usuario']['idRol'] == 3 || $_SESSION['usuario']['idRol'] == 1) :
+                            ?>
+                                <li><a href="ventas/realizar.php" class="rounded">Nueva</a></li>
+                            <?php
+                            endif;
+                            ?>
+                            <li><a href="ventas/realizadas.php" class="rounded">Realizadas</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <?php
+                if ($_SESSION['usuario']['idRol'] == 1) : ?>
+                    <li class="mb-1">
+                        <a href="usuarios.php" class="btn rounded collapsed">USUARIOS</a>
+                    </li>
+                <?php endif; ?>
                 <?php
                 if ($_SESSION['usuario']['idRol'] == 3 || $_SESSION['usuario']['idRol'] == 1) :
                 ?>
                     <li class="mb-1">
-                        <a href="ventas/realizar.php" class="btn rounded collapsed">VENTAS</a>
+                        <a href="clientes.php" class="btn rounded collapsed">CLIENTES</a>
                     </li>
                 <?php
                 endif;
                 ?>
+                <li class="mb-1">
+                    <a href="marcas.php" class="btn rounded collapsed">MARCAS</a>
+                </li>
+                <li class="mb-1">
+                    <a href="modelos.php" class="btn rounded collapsed">MODELOS</a>
+                </li>
                 <li class="mb-1">
                     <a href="inventario.php" class="btn rounded collapsed">INVENTARIO</a>
                 </li>
@@ -61,9 +90,7 @@
                     <strong><?= $_SESSION['usuario']['usuario'] ?></strong>
                 </a>
                 <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                    <li><a class="dropdown-item" href="#">New project...</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Perfil</a></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
