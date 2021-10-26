@@ -8,8 +8,7 @@ class CatalogosDB
         $conexion = Conexion::getInstancia();
         $dbh = $conexion->getDbh();
         try {
-            $consulta = "SELECT idTransmision as id, transmision
-            FROM transmision t ORDER BY id";
+            $consulta = "EXEC mostrarTransmisiones";
             $stmt = $dbh->prepare($consulta);
             $stmt->setFetchMode(PDO::FETCH_BOTH);
             $stmt->execute();
@@ -26,8 +25,7 @@ class CatalogosDB
         $conexion = Conexion::getInstancia();
         $dbh = $conexion->getDbh();
         try {
-            $consulta = "SELECT idColor as id, color FROM color
-            ORDER BY color";
+            $consulta = "EXEC mostrarColores";
             $stmt = $dbh->prepare($consulta);
             $stmt->setFetchMode(PDO::FETCH_BOTH);
             $stmt->execute();
@@ -44,8 +42,7 @@ class CatalogosDB
         $conexion = Conexion::getInstancia();
         $dbh = $conexion->getDbh();
         try {
-            $consulta = "SELECT idPais as id, pais FROM paises
-            ORDER BY pais";
+            $consulta = "EXEC mostrarPaises";
             $stmt = $dbh->prepare($consulta);
             $stmt->setFetchMode(PDO::FETCH_BOTH);
             $stmt->execute();
@@ -62,8 +59,7 @@ class CatalogosDB
         $conexion = Conexion::getInstancia();
         $dbh = $conexion->getDbh();
         try {
-            $consulta = "SELECT idTipo as id, tipo FROM tipoUsuario
-            ORDER BY id";
+            $consulta = "EXEC mostrarRoles";
             $stmt = $dbh->prepare($consulta);
             $stmt->setFetchMode(PDO::FETCH_BOTH);
             $stmt->execute();

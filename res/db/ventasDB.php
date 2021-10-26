@@ -3,63 +3,88 @@ include_once 'conexion.php';
 
 class VentasDB
 {
-    // public function getVentas()
-    // {
-    //     $conexion = Conexion::getInstancia();
-    //     $dbh = $conexion->getDbh();
-    //     try {
-    //         $consulta = "SELECT idVenta as id, nombre
-    //         FROM marca m ORDER BY nombre";
-    //         $stmt = $dbh->prepare($consulta);
-    //         $stmt->setFetchMode(PDO::FETCH_BOTH);
-    //         $stmt->execute();
-    //         $marcas = $stmt->fetchAll();
-    //         $dbh = null;
-    //     } catch (PDOException $e) {
-    //         echo $e->getMessage();
-    //     }
-    //     return $marcas;
-    // }
-
-    public function insertVenta($auto, $cliente, $cantidad, $total, $placa)
+    public function getVentas()
     {
         $conexion = Conexion::getInstancia();
         $dbh = $conexion->getDbh();
         try {
-            $consulta = "INSERT INTO venta (idAuto, idCliente, cantidad, total, placa) VALUES (?, ?, ?, ?, ?)";
+            $consulta = "EXEC mostrarVentas";
             $stmt = $dbh->prepare($consulta);
-            $stmt->bindParam(1, $auto);
-            $stmt->bindParam(2, $cliente);
-            $stmt->bindParam(3, $cantidad);
-            $stmt->bindParam(4, $total);
-            $stmt->bindParam(5, $placa);
             $stmt->setFetchMode(PDO::FETCH_BOTH);
             $stmt->execute();
+            $ventas = $stmt->fetchAll();
             $dbh = null;
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
+        return $ventas;
     }
 
-    public function existePlaca($placa){
+    public function getVentaPorId($id)
+    {
         $conexion = Conexion::getInstancia();
         $dbh = $conexion->getDbh();
         try {
-            $consulta = "SELECT count(*) FROM ventas WHERE placa = ?";
+            $consulta = "EXEC mostrarVentaId ?";
+            $stmt = $dbh->prepare($consulta);
+            $stmt->bindParam(1, $id);
+            $stmt->setFetchMode(PDO::FETCH_BOTH);
+            $stmt->execute();
+            $ventas = $stmt->fetch();
+            $dbh = null;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        return $ventas;
+    }
+
+    public function insertVenta($auto, $cliente, $total, $placa, $plazo)
+    {
+        $conexion = Conexion::getInstancia();
+        $dbh = $conexion->getDbh();
+        try {
+            $consulta = "DECLARE @id int, @ret int;
+            EXEC @ret = insertarVenta @id output, ?, ?, ?, ?, ?;
+            SELECT @id as id, @ret as ret;";
+            $stmt = $dbh->prepare($consulta);
+            $stmt->bindParam(1, $auto);
+            $stmt->bindParam(2, $cliente);
+            $stmt->bindParam(3, $total);
+            $stmt->bindParam(4, $placa);
+            $stmt->bindParam(5, $plazo);
+            $stmt->setFetchMode(PDO::FETCH_BOTH);
+            $stmt->execute();
+            while($stmt->columnCount() === 0 && $stmt->nextRowset());
+            $valor = $stmt->fetch();
+            $id = $valor[0];
+            $return = $valor[1];
+            $dbh = null;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        return $return;
+    }
+
+    public function existePlaca($placa)
+    {
+        $conexion = Conexion::getInstancia();
+        $dbh = $conexion->getDbh();
+        $return = '';
+        try {
+            $consulta = "DECLARE @ret int;
+            EXEC @ret = existePlaca ?;
+            SELECT @ret as ret;";
             $stmt = $dbh->prepare($consulta);
             $stmt->bindParam(1, $placa);
             $stmt->setFetchMode(PDO::FETCH_BOTH);
             $stmt->execute();
-            $placas = $stmt->fetch();
-            if($placas[0] == 0){
-                $val = 0;
-            }else{
-                $val = 1;
-            }
+            while($stmt->columnCount() === 0 && $stmt->nextRowset());
+            $valor = $stmt->fetch();
+            $return = $valor[0];
             $dbh = null;
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
-        return $val;
+        return $return;
     }
 }

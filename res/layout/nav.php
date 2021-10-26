@@ -17,26 +17,26 @@
                     <div class="collapse" id="altas">
                         <ul class="sub-list list-unstyled fw-normal pb-1 small">
                             <?php
-                            if ($_SESSION['usuario']['idTipo'] == 2 || $_SESSION['usuario']['idTipo'] == 1) :
+                            if ($_SESSION['usuario']['idRol'] == 2 || $_SESSION['usuario']['idRol'] == 1) :
                             ?>
                                 <li><a href="altas/autos.php" class="rounded">Autos</a></li>
                                 <li><a href="altas/marcas.php" class="rounded mt-1">Marcas</a></li>
                                 <li><a href="altas/modelos.php" class="rounded mt-1">Modelos</a></li>
                             <?php
                             endif;
-                            if ($_SESSION['usuario']['idTipo'] == 3 || $_SESSION['usuario']['idTipo'] == 1) :
+                            if ($_SESSION['usuario']['idRol'] == 3 || $_SESSION['usuario']['idRol'] == 1) :
                             ?>
                                 <li><a href="altas/clientes.php" class="rounded mt-1">Clientes</a></li>
                             <?php
                             endif;
-                            if ($_SESSION['usuario']['idTipo'] == 1) : ?>
+                            if ($_SESSION['usuario']['idRol'] == 1) : ?>
                                 <li><a href="altas/usuarios.php" class="rounded mt-1">Usuarios</a></li>
                             <?php endif; ?>
                         </ul>
                     </div>
                 </li>
                 <?php
-                if ($_SESSION['usuario']['idTipo'] == 3 || $_SESSION['usuario']['idTipo'] == 1) :
+                if ($_SESSION['usuario']['idRol'] == 3 || $_SESSION['usuario']['idRol'] == 1) :
                 ?>
                     <li class="mb-1">
                         <a href="ventas/realizar.php" class="btn rounded collapsed">VENTAS</a>

@@ -8,10 +8,7 @@ class UsuariosDB
         $conexion = Conexion::getInstancia();
         $dbh = $conexion->getDbh();
         try {
-            $consulta = "SELECT idUsuario as id, nombre, apellido, fotografia, usuario, 
-            contraseña, u.tipo as idTipo, t.tipo 
-            FROM usuario u INNER JOIN tipoUsuario t ON u.tipo = t.idTipo 
-            WHERE usuario = ?";
+            $consulta = "EXEC mostrarUsuario ?";
             $stmt = $dbh->prepare($consulta);
             $stmt->bindParam(1, $usuario);
             $stmt->setFetchMode(PDO::FETCH_BOTH);
@@ -24,26 +21,44 @@ class UsuariosDB
         return $usuarios;
     }
 
-    public function existeUsuario($usuario){
+    public function getUsuarios()
+    {
         $conexion = Conexion::getInstancia();
         $dbh = $conexion->getDbh();
         try {
-            $consulta = "SELECT count(*) FROM usuario WHERE usuario.usuario = ?";
+            $consulta = "EXEC mostrarUsuarios";
             $stmt = $dbh->prepare($consulta);
-            $stmt->bindParam(1, $usuario);
             $stmt->setFetchMode(PDO::FETCH_BOTH);
             $stmt->execute();
-            $usuarios = $stmt->fetch();
-            if($usuarios[0] == 0){
-                $val = 0;
-            }else{
-                $val = 1;
-            }
+            $usuarios = $stmt->fetchAll();
             $dbh = null;
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
-        return $val;
+        return $usuarios;
+    }
+
+    public function existeUsuario($usuario)
+    {
+        $conexion = Conexion::getInstancia();
+        $dbh = $conexion->getDbh();
+        try {
+            $consulta = "DECLARE @ret int;
+            EXEC @ret = existeUsuario ?
+            SELECT @ret as ret";
+            $stmt = $dbh->prepare($consulta);
+            $stmt->bindParam(1, $return, PDO::PARAM_INT | PDO::PARAM_INPUT_OUTPUT, PDO::SQLSRV_PARAM_OUT_DEFAULT_SIZE);
+            $stmt->bindParam(2, $usuario);
+            $stmt->setFetchMode(PDO::FETCH_BOTH);
+            $stmt->execute();
+            while ($stmt->columnCount() === 0 && $stmt->nextRowset());
+            $valor = $stmt->fetch();
+            $return = $valor[0];
+            $dbh = null;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        return $return;
     }
 
     private function insertaFoto($imagen, $id)
@@ -82,7 +97,9 @@ class UsuariosDB
         $conexion = Conexion::getInstancia();
         $dbh = $conexion->getDbh();
         try {
-            $consulta = "INSERT INTO usuario (nombre, apellido, usuario, contraseña, tipo) VALUES (?, ?, ?, ?, ?)";
+            $consulta = "DECLARE @id int, @ret int;
+            EXEC @ret = insertarUsuario @id output, ?, ?, ?, ?, ?;
+            SELECT @id as id, @ret as ret;";
             $stmt = $dbh->prepare($consulta);
             $stmt->bindParam(1, $nombre);
             $stmt->bindParam(2, $apellido);
@@ -92,21 +109,92 @@ class UsuariosDB
             $stmt->bindParam(5, $tipo);
             $stmt->setFetchMode(PDO::FETCH_BOTH);
             $stmt->execute();
+            while ($stmt->columnCount() === 0 && $stmt->nextRowset());
+            $valor = $stmt->fetch();
+            $id = $valor[0];
+            $return = $valor[1];
             if ($foto['name'] <> null) {
-                $consulta = "SELECT TOP(1) idUsuario as id FROM usuario ORDER BY id desc";
-                $stmt = $dbh->prepare($consulta);
-                $stmt->execute();
-                $id = $stmt->fetch();
-                $imagen = $this->insertaFoto($foto, $id[0]);
-                $consulta = "UPDATE usuario SET fotografia = ? WHERE idUsuario = ?";
+                $imagen = $this->insertaFoto($foto, $id);
+                $consulta = "EXEC insertarFotoUsuario ?, ?";
                 $stmt = $dbh->prepare($consulta);
                 $stmt->bindParam(1, $imagen);
-                $stmt->bindParam(2, $id[0]);
+                $stmt->bindParam(2, $id);
                 $stmt->execute();
             }
             $dbh = null;
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
+        return $return;
+    }
+
+    public function modificaUsuarioPassword($nombre, $apellido, $foto, $usuario, $contraseña, $tipo, $id)
+    {
+        $conexion = Conexion::getInstancia();
+        $dbh = $conexion->getDbh();
+        try {
+            $consulta = "DECLARE @ret int;
+            EXEC @ret = insertarUsuario ?, ?, ?, ?, ?, ?;
+            SELECT @ret as ret;";
+            $stmt = $dbh->prepare($consulta);
+            $stmt->bindParam(1, $id);
+            $stmt->bindParam(2, $nombre);
+            $stmt->bindParam(3, $apellido);
+            $stmt->bindParam(4, $usuario);
+            $contraseña = password_hash($contraseña, PASSWORD_DEFAULT);
+            $stmt->bindParam(5, $contraseña);
+            $stmt->bindParam(6, $tipo);
+            $stmt->setFetchMode(PDO::FETCH_BOTH);
+            $stmt->execute();
+            while ($stmt->columnCount() === 0 && $stmt->nextRowset());
+            $valor = $stmt->fetch();
+            $return = $valor[0];
+            if ($foto['name'] <> null) {
+                $imagen = $this->insertaFoto($foto, $id);
+                $consulta = "EXEC insertarFotoUsuario ?, ?";
+                $stmt = $dbh->prepare($consulta);
+                $stmt->bindParam(1, $imagen);
+                $stmt->bindParam(2, $id);
+                $stmt->execute();
+            }
+            $dbh = null;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        return $return;
+    }
+
+    public function modificaUsuario($nombre, $apellido, $foto, $usuario, $tipo, $id)
+    {
+        $conexion = Conexion::getInstancia();
+        $dbh = $conexion->getDbh();
+        try {
+            $consulta = "DECLARE @ret int;
+            EXEC @ret = insertarUsuario ?, ?, ?, ?, ?, ?;
+            SELECT @ret as ret;";
+            $stmt = $dbh->prepare($consulta);
+            $stmt->bindParam(1, $id);
+            $stmt->bindParam(2, $nombre);
+            $stmt->bindParam(3, $apellido);
+            $stmt->bindParam(4, $usuario);
+            $stmt->bindParam(5, $tipo);
+            $stmt->setFetchMode(PDO::FETCH_BOTH);
+            $stmt->execute();
+            while ($stmt->columnCount() === 0 && $stmt->nextRowset());
+            $valor = $stmt->fetch();
+            $return = $valor[0];
+            if ($foto['name'] <> null) {
+                $imagen = $this->insertaFoto($foto, $id);
+                $consulta = "EXEC insertarFotoUsuario ?, ?";
+                $stmt = $dbh->prepare($consulta);
+                $stmt->bindParam(1, $imagen);
+                $stmt->bindParam(2, $id);
+                $stmt->execute();
+            }
+            $dbh = null;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        return $return;
     }
 }

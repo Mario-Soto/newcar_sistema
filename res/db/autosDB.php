@@ -39,7 +39,9 @@ class AutosDB
         $conexion = Conexion::getInstancia();
         $dbh = $conexion->getDbh();
         try {
-            $consulta = "INSERT INTO autos (idMarca, idModelo, idColor, kilometraje, estado, descripcion, precio) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $consulta = "DECLARE @id int, @ret int;
+            EXEC @ret = insertaAuto  @id output, ?, ?, ?, ?, ?, ?, ?;
+            SELECT @id as id, @ret as ret;";
             $stmt = $dbh->prepare($consulta);
             $stmt->bindParam(1, $marca);
             $stmt->bindParam(2, $modelo);
@@ -50,22 +52,60 @@ class AutosDB
             $stmt->bindParam(7, $precio);
             $stmt->setFetchMode(PDO::FETCH_BOTH);
             $stmt->execute();
+            while($stmt->columnCount() === 0 && $stmt->nextRowset());
+            $valor = $stmt->fetch();
+            $id = $valor[0];
+            $return = $valor[1];
             if ($foto['name'] <> null) {
-                $consulta = "SELECT TOP(1) idAuto as id FROM autos ORDER BY id desc";
-                $stmt = $dbh->prepare($consulta);
-                $stmt->execute();
-                $id = $stmt->fetch();
-                $imagen = $this->insertaFoto($foto, $id[0]);
-                $consulta = "UPDATE autos SET fotografia = ? WHERE idAuto = ?";
+                $imagen = $this->insertaFoto($foto, $id);
+                $consulta = "EXEC insertaFotoAuto ?, ?";
                 $stmt = $dbh->prepare($consulta);
                 $stmt->bindParam(1, $imagen);
-                $stmt->bindParam(2, $id[0]);
+                $stmt->bindParam(2, $id);
                 $stmt->execute();
             }
             $dbh = null;
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
+        return $return;
+    }
+
+    public function modificaAuto($marca, $modelo, $color, $estado, $kilometraje, $descripcion, $precio, $foto, $id)
+    {
+        $conexion = Conexion::getInstancia();
+        $dbh = $conexion->getDbh();
+        try {
+            $consulta = "DECLARE @ret int;
+            EXEC @ret = modificaAuto ?,?,?,?,?,?,?,?;
+            SELECT @ret as ret";
+            $stmt = $dbh->prepare($consulta);
+            $stmt->bindParam(1, $id);
+            $stmt->bindParam(2, $marca);
+            $stmt->bindParam(3, $modelo);
+            $stmt->bindParam(4, $color);
+            $stmt->bindParam(5, $kilometraje);
+            $stmt->bindParam(6, $estado);
+            $stmt->bindParam(7, $descripcion);
+            $stmt->bindParam(8, $precio);
+            $stmt->setFetchMode(PDO::FETCH_BOTH);
+            $stmt->execute();
+            while ($stmt->columnCount() === 0 && $stmt->nextRowset());
+            $valor = $stmt->fetch();
+            $return = $valor[0];
+            if ($foto['name'] <> null) {
+                $imagen = $this->insertaFoto($foto, $id);
+                $consulta = "EXEC insertaFotoAuto ?, ?";
+                $stmt = $dbh->prepare($consulta);
+                $stmt->bindParam(1, $imagen);
+                $stmt->bindParam(2, $id);
+                $stmt->execute();
+            }
+            $dbh = null;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        return $return;
     }
 
     public function getAutos()
@@ -73,12 +113,7 @@ class AutosDB
         $conexion = Conexion::getInstancia();
         $dbh = $conexion->getDbh();
         try {
-            $consulta = "SELECT idAuto as id, ma.nombre as marca, mo.nombre as modelo, version, año, transmision, color, kilometraje, estado, descripcion, CAST(precio AS NUMERIC(10,2)) as precio, fotografia 
-            FROM autos a 
-            INNER JOIN marca ma ON a.idMarca = ma.idMarca
-            INNER JOIN modelo mo ON a.idModelo = mo.idModelo
-            INNER JOIN color c ON a.idColor = c.idColor
-            INNER JOIN transmision t ON mo.idTransmision = t.idTransmision";
+            $consulta = "EXEC mostrarAutos";
             $stmt = $dbh->prepare($consulta);
             $stmt->setFetchMode(PDO::FETCH_BOTH);
             $stmt->execute();
@@ -95,13 +130,7 @@ class AutosDB
         $conexion = Conexion::getInstancia();
         $dbh = $conexion->getDbh();
         try {
-            $consulta = "SELECT idAuto as id, ma.nombre as marca, mo.nombre as modelo, version, año, transmision, color, kilometraje, estado, descripcion, CAST(precio AS NUMERIC(10,2)) as precio, fotografia 
-            FROM autos a 
-            INNER JOIN marca ma ON a.idMarca = ma.idMarca
-            INNER JOIN modelo mo ON a.idModelo = mo.idModelo
-            INNER JOIN color c ON a.idColor = c.idColor
-            INNER JOIN transmision t ON mo.idTransmision = t.idTransmision
-            WHERE idAuto = ?";
+            $consulta = "EXEC mostrarAutosId ?";
             $stmt = $dbh->prepare($consulta);
             $stmt->bindParam(1, $id);
             $stmt->setFetchMode(PDO::FETCH_BOTH);
@@ -119,20 +148,10 @@ class AutosDB
         $conexion = Conexion::getInstancia();
         $dbh = $conexion->getDbh();
         try {
-            $consulta = "SELECT idAuto as id, ma.nombre as marca, mo.nombre as modelo, version, año, transmision, color, kilometraje, estado, descripcion, CAST(precio AS NUMERIC(10,2)) as precio, fotografia 
-            FROM autos a 
-            INNER JOIN marca ma ON a.idMarca = ma.idMarca
-            INNER JOIN modelo mo ON a.idModelo = mo.idModelo
-            INNER JOIN color c ON a.idColor = c.idColor
-            INNER JOIN transmision t ON mo.idTransmision = t.idTransmision
-            WHERE ma.nombre LIKE ? OR mo.nombre LIKE ? OR version LIKE ? OR año LIKE ? OR transmision LIKE ?";
+            $consulta = "EXEC buscarAuto ?";
             $busca = "%$busca%";
             $stmt = $dbh->prepare($consulta);
             $stmt->bindParam(1, $busca);
-            $stmt->bindParam(2, $busca);
-            $stmt->bindParam(3, $busca);
-            $stmt->bindParam(4, $busca);
-            $stmt->bindParam(5, $busca);
             $stmt->setFetchMode(PDO::FETCH_BOTH);
             $stmt->execute();
             $autos = $stmt->fetchAll();
