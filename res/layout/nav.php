@@ -77,7 +77,7 @@
                     <a href="inventario.php" class="btn rounded collapsed">INVENTARIO</a>
                 </li>
                 <li class="mb-1">
-                    <a class="btn rounded collapsed">TICKETS</a>
+                    <a href="tickets.php" class="btn rounded collapsed">TICKETS</a>
                 </li>
                 <li class="mb-1">
                     <a href="https://newcarconcesionaria.azurewebsites.net/" target="_blank" class="btn rounded collapsed">SITIO WEB</a>

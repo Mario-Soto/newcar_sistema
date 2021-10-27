@@ -108,6 +108,29 @@ footer {
 	border-color: #465185;
 }
 
+.btn-ver {
+	padding: 5px auto;
+	background-color: #6e77a2;
+	color: white;
+	text-align: center;
+}
+
+.btn-ver:hover {
+	background-color: rgba(110, 119, 162, 0.85);
+	border-color: #465185;
+}
+
+.btn-down {
+	padding: 5px auto;
+	background-color: #608795;
+	color: white;
+	text-align: center;
+}
+
+.btn-down:hover {
+	background-color: rgba(96, 135, 149, 0.85);
+	border-color: #3b6a7a;
+}
 /*         */
 /* SISTEMA */
 /*         */

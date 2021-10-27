@@ -6,7 +6,7 @@ if (isset($_SESSION['usuario'])) :
     include 'res/layout/header.html';
 ?>
     <div class="col-12 col-sm-10 col-md-9 col-lg-8 mx-auto mb-5">
-        <form action="php/inserta_usuario.php" method="post" class="row bg-g p-3" enctype="multipart/form-data">
+        <form action="php/cambiar_datos.php" method="post" class="row bg-g p-3" enctype="multipart/form-data">
             <legend class="mx-auto text-center mb-0">
                 <h2>Perfil de <?= $_SESSION['usuario']['nombre'] . ' ' . $_SESSION['usuario']['apellido'] ?></h2>
             </legend>
@@ -38,35 +38,34 @@ if (isset($_SESSION['usuario'])) :
                         <input type="text" name="usuario" id="usuario" class="form-control-plaintext text-white" value="<?= $_SESSION['usuario']['usuario']  ?>" required readonly>
                     </div>
                 </div>
-                <!-- TODO: PONER D-NONE -->
-                <div id="fotos" class="row mt-3 ">
+                <div id="fotos" class="row mt-3 d-none">
                     <label for="fotografia" class="col-form-label col-sm-3 col-form-label-sm">Fotografía</label>
                     <div class="col-sm-9">
                         <input type="file" name="fotografia" id="fotografia" class="form-control" accept="image/*">
                     </div>
                 </div>
             </div>
-            <div class="row mt-5">
+            <div id="editar_info_div" class="row mt-4">
                 <div class="col-10 col-xl-8 text-center mx-auto">
                     <input type="button" id="editar_info" value="Editar información" class="btn btn-conf col-12 col-lg-10">
                 </div>
             </div>
-            <div id="botones" class="row mt-5">
+            <div id="botones" class="row mt-4 d-none">
                 <div class="col-6 text-center">
-                    <input type="reset" value="Limpiar" class="btn btn-limpiar col-12 col-lg-10">
+                    <input type="button" onclick="regresarPerfil();" value="Cancelar" class="btn btn-limpiar col-12 col-lg-10">
                 </div>
                 <div class="col-6 text-center">
                     <input type="submit" value="Guardar" class="btn btn-submit col-12 col-lg-10">
                 </div>
             </div>
         </form>
-        <form action="" method="post" class="bg-g px-3">
-            <div class="row">
+        <form action="php/cambiar_datos.php" method="post" class="bg-g px-3 pb-4">
+            <div class="row" id="camb_pass">
                 <div class="col-10 col-xl-8 text-center mx-auto">
-                    <input type="button" id="camb_pass" value="Cambiar contraseña" class="btn btn-conf col-12 col-lg-10">
+                    <input type="button" onclick="cambiarPassUsuario();" value="Cambiar contraseña" class="btn btn-conf col-12 col-lg-10">
                 </div>
             </div>
-            <div id="form_contr">
+            <div id="form_contr" class="d-none">
                 <div class="row">
                     <div class="col-12 col-lg-6 mt-3">
                         <label for="contraseña" class="form-label">Contraseña</label>
@@ -106,5 +105,14 @@ else :
 <?php
 endif;
 include 'res/layout/scripts.html';
+if (isset($_GET['modificado'])) {
+    include 'res/db/alertasDB.php';
+    $alertasdb = new AlertasDB();
+    if ($_GET['modificado'] == 1) {
+        $alertasdb->nuevaAlertaIcono('success', 'Datos modificados', 'Se actualizaron los datos satisfactoriamente');
+    } else {
+        $alertasdb->nuevaAlertaIcono('error', 'Oops! Ocurrió un error', 'No fue posible actualizar los datos');
+    }
+}
 include 'res/layout/cierre.html';
 ?>

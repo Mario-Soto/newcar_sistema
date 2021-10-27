@@ -189,7 +189,7 @@ class UsuariosDB
         $dbh = $conexion->getDbh();
         try {
             $consulta = "DECLARE @ret int;
-            EXEC @ret = insertarUsuario ?, ?, ?, ?, ?, ?;
+            EXEC @ret = modificarUsuario ?, ?, ?, ?, ?;
             SELECT @ret as ret;";
             $stmt = $dbh->prepare($consulta);
             $stmt->bindParam(1, $id);
@@ -215,5 +215,23 @@ class UsuariosDB
             echo $e->getMessage();
         }
         return $return;
+    }
+
+    public function modificaPassword($contraseña, $id)
+    {
+        $conexion = Conexion::getInstancia();
+        $dbh = $conexion->getDbh();
+        try {
+            $consulta = "EXEC modificaPassword ?, ?";
+            $stmt = $dbh->prepare($consulta);
+            $stmt->bindParam(1, $id);
+            $contraseña = password_hash($contraseña, PASSWORD_DEFAULT);
+            $stmt->bindParam(2, $contraseña);
+            $stmt->setFetchMode(PDO::FETCH_BOTH);
+            $stmt->execute();
+            $dbh = null;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
     }
 }

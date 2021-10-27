@@ -120,3 +120,28 @@ $("#emplacar").change(function () {
 	$("#precio").val(total);
 	$("#placas").val(placa);
 });
+
+$("#editar_info").click(function(){
+	$("#fotos").removeClass("d-none");
+	$("#editar_info_div").addClass("d-none");
+	$("#botones").removeClass("d-none");
+	$(".form-control-plaintext").removeClass("text-white");
+	$(".form-control-plaintext").addClass("form-control control-activo");
+	$(".form-control-plaintext").prop("readonly", false);
+	$(".form-control-plaintext").removeClass("form-control-plaintext");
+});
+
+function regresarPerfil(){
+	$(".control-activo").removeClass("form-control");
+	$(".control-activo").addClass("text-white");
+	$(".control-activo").addClass("form-control-plaintext");
+	$(".control-activo").prop("readonly", true);
+	$("#fotos").addClass("d-none");
+	$("#editar_info_div").removeClass("d-none");
+	$("#botones").addClass("d-none");
+}
+
+function cambiarPassUsuario(){
+	$("#camb_pass").addClass("d-none");
+	$("#form_contr").removeClass("d-none")
+}
