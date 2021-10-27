@@ -50,7 +50,7 @@ if (isset($_SESSION['usuario'])) :
                             <span class="d-block">Transmision: <span class="text-decoration-underline px-1"><?= $auto['transmision'] ?></span></span>
                             <span class="d-block">Color: <span class="text-decoration-underline px-1"><?= $auto['color'] ?></span></span>
                             <span class="d-block">Estado: <span class="text-decoration-underline px-1"><?= $auto['estado'] == 1 ? 'Usado (' . $auto['kilometraje'] . ' km)' : 'Nuevo' ?></span></span>
-                            <span class="d-block">Precio: <span class="text-decoration-underline px-1">$<?= $auto['precio'] ?></span></span>
+                            <span class="d-block">Precio: $<span class="text-decoration-underline px-1 solo-num"><?= $auto['precio'] ?></span></span>
                             <div class="my-2 d-flex justify-content-evenly">
                                 <a class="btn btn-warning" href="altas/autos.php?id=<?= $auto['id'] ?>"><i class="far fa-edit"></i></a>
                                 <a class="btn btn-danger" href="php/eliminar.php?auto=<?= $auto['id'] ?>"><i class="far fa-trash-alt text-black"></i></a>

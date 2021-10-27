@@ -41,8 +41,8 @@ if (isset($_SESSION['usuario'])) :
                 <tr>
                     <td>
                         <div class="my-2 d-flex justify-content-evenly">
-                            <a class="btn btn-ver" href="php/ticket.php?id=<?= $venta['id'] ?>"><i class="fas fa-eye"></i></a>
-                            <a class="btn btn-down" href="php/ticket.php?id_p=<?= $venta['id'] ?>"><i class="fas fa-download"></i></a>
+                            <a class="btn btn-ver" target="_blank" href="ticket.php?id=<?= $venta['id'] ?>"><i class="fas fa-eye"></i></a>
+                            <a class="btn btn-down" href="ticket.php?id=<?= $venta['id'] ?>&download=true"><i class="fas fa-download"></i></a>
                         </div>
                     </td>
                     <td class="align-middle">
