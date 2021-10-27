@@ -68,7 +68,7 @@ if (isset($_SESSION['usuario'])) :
                     <option value="1" <?= isset($venta)&&$venta['formaPago']==1?'selected':null ?>>Efectivo</option>
                     <option value="2" <?= isset($venta)&&$venta['formaPago']==2?'selected':null ?>>Crédito</option>
                 </select>
-                <div class="d-none" id="plazos">
+                <div class="<?= isset($venta)&&$venta['formaPago']==1?'d-none':null ?>" id="plazos">
                     <label for="plazo" class="form-label mt-2">Plazo</label>
                     <select name="plazo" id="plazo" class="form-select">
                         <option></option>
