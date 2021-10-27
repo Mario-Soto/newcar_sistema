@@ -108,4 +108,20 @@ class ClientesDB
         }
         return $clientes;
     }
+
+    public function elimina($id)
+    {
+        $conexion = Conexion::getInstancia();
+        $dbh = $conexion->getDbh();
+        try {
+            $consulta = "DELETE FROM clientes WHERE idCliente = ?";
+            $stmt = $dbh->prepare($consulta);
+            $stmt->bindParam(1, $id);
+            $stmt->setFetchMode(PDO::FETCH_BOTH);
+            $stmt->execute();
+            $dbh = null;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 }

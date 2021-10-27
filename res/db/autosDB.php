@@ -142,7 +142,22 @@ class AutosDB
         }
         return $autos;
     }
-
+    public function elimina($id)
+    {
+        $conexion = Conexion::getInstancia();
+        $dbh = $conexion->getDbh();
+        try {
+            $consulta = "DELETE FROM autos WHERE idAuto = ?";
+            $stmt = $dbh->prepare($consulta);
+            $stmt->bindParam(1, $id);
+            $stmt->setFetchMode(PDO::FETCH_BOTH);
+            $stmt->execute();
+            $stmt->fetch();
+            $dbh = null;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
     public function buscaAutos($busca)
     {
         $conexion = Conexion::getInstancia();

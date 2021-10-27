@@ -12,7 +12,7 @@ if (isset($_SESSION['usuario'])) :
         $ventas = $ventasdb->getVentas();
     }
 ?>
-    <h1 class="text-center">Ventas</h1>
+    <h1 class="text-center">Tickets</h1>
     <form action="<?= $_SERVER['PHP_SELF'] ?>" method="get" class="row mb-4 mt-2">
         <div class="row justify-content-center">
             <div class="col-8 col-md-7 col-lg-6">

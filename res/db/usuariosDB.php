@@ -234,4 +234,19 @@ class UsuariosDB
             echo $e->getMessage();
         }
     }
+    public function elimina($id)
+    {
+        $conexion = Conexion::getInstancia();
+        $dbh = $conexion->getDbh();
+        try {
+            $consulta = "DELETE FROM usuario WHERE usuario = ?";
+            $stmt = $dbh->prepare($consulta);
+            $stmt->bindParam(1, $id);
+            $stmt->setFetchMode(PDO::FETCH_BOTH);
+            $stmt->execute();
+            $dbh = null;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 }
