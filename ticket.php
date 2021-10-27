@@ -23,7 +23,7 @@ class PDF extends FPDF
         $this->Ln(30);
     }
 
-    function Atributo($atributo,)
+    function Atributo($atributo)
     {
         $this->SetFont('Times', 'B', 16);
         $this->Cell(40, 16, "$atributo: ", 0, 0, 'R');
@@ -139,5 +139,5 @@ if(isset($_GET['download'])){
     $pdf->Output('D','ticket_venta'.$_GET['id'].'.pdf',true);
 }else{
     $pdf->Output('I','ticket_venta'.$_GET['id'].'.pdf',true);
-    
+
 }
