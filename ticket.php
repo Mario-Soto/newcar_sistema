@@ -1,8 +1,6 @@
 <?php
 session_start();
 require('fpdf.php');
-
-
 class PDF extends FPDF
 {
     protected $col1;
@@ -141,4 +139,5 @@ if(isset($_GET['download'])){
     $pdf->Output('D','ticket_venta'.$_GET['id'].'.pdf',true);
 }else{
     $pdf->Output('I','ticket_venta'.$_GET['id'].'.pdf',true);
+    
 }
