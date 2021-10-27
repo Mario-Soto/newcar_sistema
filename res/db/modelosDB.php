@@ -30,7 +30,7 @@ class ModelosDB
             $stmt->setFetchMode(PDO::FETCH_BOTH);
             $stmt->bindParam(1, $id);
             $stmt->execute();
-            $modelos = $stmt->fetchAll();
+            $modelos = $stmt->fetch();
             $dbh = null;
         } catch (PDOException $e) {
             echo $e->getMessage();
