@@ -88,7 +88,7 @@ class ModelosDB
         $dbh = $conexion->getDbh();
         try {
             $consulta = "DECLARE  @ret int;
-            EXEC @ret = insertarModelo ?, ?, ?, ?;
+            EXEC @ret = modificarModelo ?, ?, ?, ?;
             SELECT  @ret as ret;";
             $stmt = $dbh->prepare($consulta);
             $stmt->bindParam(1, $id);
